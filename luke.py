@@ -9,7 +9,7 @@ class State():
       self.missionaryRight = missionaryRight
       self.parent = None
 
-   def is_goal(self):
+   def is_ending(self):
       if self.cannibalLeft == 0 and self.missionaryLeft == 0:
          return True
       else:
@@ -100,14 +100,14 @@ def successors(cur_state):
 
 def breadth_first_search():
    initial_state = State(3,3,'left',0,0)
-   if initial_state.is_goal():
+   if initial_state.is_ending():
       return initial_state
    frontier = list()
    explored = set()
    frontier.append(initial_state)
    while frontier:
       state = frontier.pop(0)
-      if state.is_goal():
+      if state.is_ending():
          return state
       explored.add(state)
       children = successors(state)
@@ -126,9 +126,9 @@ def print_solution(solution):
 
       for t in range(len(path)):
          state = path[len(path) - t - 1]
-         print(" + str(state.cannibalLeft) + "," + str(state.missionaryLeft) \
-                              + "," + state.boat + "," + str(state.cannibalRight) + "," + \
-                              str(state.missionaryRight) + ")
+         print(" str(state.cannibalLeft) "," str(state.missionaryLeft) \
+                              "," state.boat "," str(state.cannibalRight) "," \
+                              str(state.missionaryRight) ")
 
 def main():
    solution = breadth_first_search()
