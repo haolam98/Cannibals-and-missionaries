@@ -14,9 +14,18 @@ Work's Explanation:
 				+ boat: location of the boat at current; 'L' indicates at left side - 'R' indicates at right side
 				+ cannibalRight: number of cannibals on  the RIGHT side of river at current
 				+ missionaryRight: number of missionaries on  the RIGHT side of river at current
+				
+		The initial state where 3 cannibals, 3 missionaries and boat are on LEFT side will be written as: (3,3,L,0,0)
+		The goal state where where 3 cannibals, 3 missionaries and boat are on RIGHT side will be written as (0,0,R,3,3)
 	
 	- For this problem, we choose to apply Breadth-first search (BFS) algorithm to run for the solution.
-
+		+ First, get all the available-expandable states at the shallowest level
+		+ Next, add these states to frontier_list and explored_list
+		+ Then, apply FIFO for the frontier_list and get the next-level states (child)
+		+ Continue, add child to the frontier_list
+		+ Repeat all steps above until reach a child_state that equals to goal_state. Then, finally return as solution.
+		
+	- The output result will display the solution and states to get to the goal state (0,0,R,3,3) from the initial state (3,3,L,0,0).
 */
 
 package angelcs461H3;
