@@ -1,5 +1,25 @@
-package angelcs461H3;
+/*
+CS461 - Homework 3B
+Group of 3:
+	- Xianqiu Yu
+	- Guodong Lu
+	- Hao Lam
 
+Work's Explanation:
+	- The format of each state will be: 
+		(cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight)
+			where:
+				+ cannibalLeft: number of cannibals on  the LEFT side of river at current
+				+ missionaryLeft: number of missionaries on  the LEFT side of river at current
+				+ boat: location of the boat at current; 'L' indicates at left side - 'R' indicates at right side
+				+ cannibalRight: number of cannibals on  the RIGHT side of river at current
+				+ missionaryRight: number of missionaries on  the RIGHT side of river at current
+	
+	- For this problem, we choose to apply Breadth-first search (BFS) algorithm to run for the solution.
+
+*/
+
+package angelcs461H3;
 import java.util.ArrayList;
 import java.util.*;
 
@@ -20,6 +40,7 @@ class MultipleClasses {
 
 		private static void result(State solution) {
 			if (null == solution) {
+				//if no solution found
 				System.out.print("\nNo solution found.");
 			} else {
 				System.out.println("\nSolution (cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight): ");
@@ -31,15 +52,19 @@ class MultipleClasses {
 				}
 
 				int depth = path.size() - 1;
+				// print out each state of the solution
 				for (int i = depth; i >= 0; i--) {
 					state = path.get(i);
 					if (state.isGoal()) {
+						// if reach goal state, print out the state only
 						System.out.print(state.toString());
 					} else {
+						// if goal not reach, continue print out state and '->'
 						System.out.print(state.toString() + " -> ");
 					}
 				}
-				System.out.println("\nDepth: " + depth);
+				//print out the Depth (number of steps) to get to the goal state.
+				System.out.println("\nDepth (nunber of steps): " + depth);
 				
 			}
 		}
@@ -54,6 +79,7 @@ class BFS {
 	// pass initial state as input to the bread first search algorithm that returns the result to the problem.
 	public State action(State initialState) {
 		if (initialState.isGoal()) {
+			//if 'initialState' = goal state -> return immediately
 			return initialState;
 		}
 		Queue<State> frontier = new LinkedList<State>();	// FIFO queue
@@ -63,9 +89,11 @@ class BFS {
 			if (frontier.isEmpty()) {
 				return null;	// Fail
 			}
-			State state = frontier.poll();
-			explored.add(state);
-			List<State> successors = state.successors();
+			State state = frontier.poll(); // remove and return the state up front
+			explored.add(state); 
+			List<State> successors = state.successors(); //get the list of successors for current state
+			
+			// run through successors list
 			for (State child : successors) {
 				if (!explored.contains(child) || !frontier.contains(child)) {
 					if (child.isGoal()) {
@@ -78,7 +106,7 @@ class BFS {
 	}
 }
 
-
+// State class
 class State {
 
 	private int cannibalLeft;
@@ -98,10 +126,12 @@ class State {
 		this.missionaryRight = missionaryRight;
 	}
 
+	//isGoal method check if the goal is meet. Return TRUE/FALSE value	
 	public boolean isGoal() {
 		return cannibalLeft == 0 && missionaryLeft == 0;
 	}
 
+	//isValid method check if the state carries valid values. Return TRUE/FALSE
 	public boolean isValid() {
 		if (missionaryLeft >= 0 && missionaryRight >= 0 && cannibalLeft >= 0 && cannibalRight >= 0
 	               && (missionaryLeft == 0 || missionaryLeft >= cannibalLeft)
@@ -114,7 +144,9 @@ class State {
 	//successors method checks the actions that can be applied to a particular state and returns the valid successor states.
 	public List<State> successors() {
 		List<State> successors = new ArrayList<State>();
+		
 		if (boat == Position.LEFT) {
+			// boat is on LEFT side. Check & add all possible next states can get for current state
 			testAndAdd(successors, new State(cannibalLeft, missionaryLeft - 2, Position.RIGHT,
 					cannibalRight, missionaryRight + 2)); 											// Two missionaries cross left to right.
 			testAndAdd(successors, new State(cannibalLeft - 2, missionaryLeft, Position.RIGHT,
@@ -126,6 +158,7 @@ class State {
 			testAndAdd(successors, new State(cannibalLeft - 1, missionaryLeft, Position.RIGHT,
 					cannibalRight + 1, missionaryRight)); 											// One cannibal crosses left to right.
 		} else {
+			// boat is on RIGHT side. Check & add all possible next states can get for current state
 			testAndAdd(successors, new State(cannibalLeft, missionaryLeft + 2, Position.LEFT,
 					cannibalRight, missionaryRight - 2)); 											// Two missionaries cross right to left.
 			testAndAdd(successors, new State(cannibalLeft + 2, missionaryLeft, Position.LEFT,
@@ -140,10 +173,12 @@ class State {
 		return successors;
 	}
 
+	// testAndAdd method checks if the newState is valid. 
+		// And, if it does, add newState to the successors list and set its parrent to current state (this)
 	private void testAndAdd(List<State> successors, State newState) {
 		if (newState.isValid()) {
 			newState.setParentState(this);
-			successors.add(newState);
+			successors.add(newState); // add to 'successors' list
 		}
 	}
 
