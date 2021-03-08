@@ -59,7 +59,7 @@ class MultipleClasses {
 				//if no solution found
 				System.out.print("\nNo solution found.");
 			} else {
-				System.out.println("\nSolution (cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight): ");
+				System.out.println("\nSolution (cannibalLeft, missionaryLeft, boat, cannibalRight, missionaryRight ): ");
 				List<State> path = new ArrayList<State>();
 				State state = solution;
 				while(null!=state) {
@@ -81,7 +81,7 @@ class MultipleClasses {
 				}
 				//print out the Depth (number of steps) to get to the goal state.
 				System.out.println("\nDepth (nunber of steps): " + depth);
-				System.out.println("The most efficient cost of this search: " + depth + "points");
+				System.out.println("The most efficient cost of this search: " + depth + " points. ");
 				
 			}
 		}
@@ -257,11 +257,11 @@ class State {
 
 	public String toString() {
 		if (boat == Position.LEFT) {
-			return "(" + cannibalLeft + "," + missionaryLeft + ",L,"
-        			+ cannibalRight + "," + missionaryRight + ")";
+			return "(" + cannibalLeft + ", " + missionaryLeft + ", L, "
+        			+ cannibalRight + ", " + missionaryRight + ")";
 		} else {
-			return "(" + cannibalLeft + "," + missionaryLeft + ",R,"
-        			+ cannibalRight + "," + missionaryRight + ")";
+			return "(" + cannibalLeft + ", " + missionaryLeft + ", R, "
+        			+ cannibalRight + ", " + missionaryRight + ")";
 		}
      }
 
