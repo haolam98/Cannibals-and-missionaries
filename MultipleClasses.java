@@ -33,7 +33,7 @@ Work's Explanation:
 	Depth (nunber of steps): 11
 */
 
-package angelcs461H3;
+
 import java.util.ArrayList;
 import java.util.*;
 
@@ -41,8 +41,8 @@ enum Position {RIGHT, LEFT}
 
 class MultipleClasses {
 		public static void main(String[] args) {
-			System.out.println("\n****** Missionaries and Cannibals Implementation ******");
 			State initialState = new State (3, 3, Position.LEFT, 0, 0);
+			//invoke breadth-first search algorithm 
 			runBFS(initialState);
 		}
 
@@ -79,6 +79,7 @@ class MultipleClasses {
 				}
 				//print out the Depth (number of steps) to get to the goal state.
 				System.out.println("\nDepth (nunber of steps): " + depth);
+				System.out.println("The cost of this search: " + depth + "points");
 				
 			}
 		}
