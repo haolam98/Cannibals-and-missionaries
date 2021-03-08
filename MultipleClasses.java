@@ -24,6 +24,7 @@ Work's Explanation:
 		+ Then, apply FIFO for the frontier_list and get the next-level states (child)
 		+ Continue, add child to the frontier_list
 		+ Repeat all steps above until reach a child_state that equals to goal_state. Then, finally return as solution.
+	In the end, the ouput solution will be one of the most efficient solution. The algorithm will stop and return the result as soon as there's one reaching the goal state.
 		
 	- The output result will display the solution and states to get to the goal state (0,0,R,3,3) from the initial state (3,3,L,0,0).
 		+ Output expected to be when run the code as below:
@@ -31,6 +32,7 @@ Work's Explanation:
 	Solution (cannibalLeft,missionaryLeft,boat,cannibalRight,missionaryRight): 
 	(3,3,L,0,0) -> (1,3,R,2,0) -> (2,3,L,1,0) -> (0,3,R,3,0) -> (1,3,L,2,0) -> (1,1,R,2,2) -> (2,2,L,1,1) -> (2,0,R,1,3) -> (3,0,L,0,3) -> (1,0,R,2,3) -> (1,1,L,2,2) -> (0,0,R,3,3)
 	Depth (nunber of steps): 11
+	The most efficient cost of this search: 11 points
 */
 
 
@@ -79,7 +81,7 @@ class MultipleClasses {
 				}
 				//print out the Depth (number of steps) to get to the goal state.
 				System.out.println("\nDepth (nunber of steps): " + depth);
-				System.out.println("The cost of this search: " + depth + "points");
+				System.out.println("The most efficient cost of this search: " + depth + "points");
 				
 			}
 		}
