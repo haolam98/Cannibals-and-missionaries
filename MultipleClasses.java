@@ -41,7 +41,7 @@ import java.util.*;
 
 enum Position {RIGHT, LEFT}
 
-class MultipleClasses {
+public class MultipleClasses {
 		public static void main(String[] args) {
 			State initialState = new State (3, 3, Position.LEFT, 0, 0);
 			//invoke breadth-first search algorithm 
